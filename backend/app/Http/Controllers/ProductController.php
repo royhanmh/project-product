@@ -11,7 +11,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'product_name' => 'required|string|max:150',
+            'name' => 'required|string|max:150',
             'category' => 'required|string|max:100',
             'price' => 'required|numeric',
             'discount' => 'nullable|numeric',
@@ -47,7 +47,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         $validatedData = $request->validate([
-            'product_name' => 'sometimes|required|string|max:150',
+            'name' => 'sometimes|required|string|max:150',
             'category' => 'sometimes|required|string|max:100',
             'price' => 'sometimes|required|numeric',
             'discount' => 'nullable|numeric',
