@@ -41,6 +41,17 @@ class ProductController extends Controller
         ]);
     }
 
+    public function show(string $id)
+    {
+        $product = Product::findOrFail($id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Product retrieved successfully!',
+            'data' => $product,
+        ]);
+    }
+
     // Update Product
     public function update(Request $request, $id)
     {
