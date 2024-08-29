@@ -42,7 +42,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ onAddSuccess }) => {
 
   return (
     <>
-      <Button onClick={() => setIsModalOpen(true)} className="mb-4">
+      <Button onClick={() => setIsModalOpen(true)} className="my-8">
         Add Product
       </Button>
 
