@@ -1,50 +1,113 @@
-# React + TypeScript + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+This project is the frontend component of the application, developed using [React](https://reactjs.org/) with [TypeScript](https://www.typescriptlang.org/). It provides the user interface and interacts with the backend to manage products and handle other functionalities.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting Started
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Before you begin, ensure you have met the following requirements:
 
-- Configure the top-level `parserOptions` property like this:
+- [Node.js](https://nodejs.org/) (version 20 or higher)
+- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/royhanmh/project-product
+   ```
+
+2. **Navigate to the frontend directory:**
+
+   ```bash
+   cd frontend
+   ```
+
+3. **Install dependencies:**
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+### Running the Application
+
+To start the development server, run:
+
+```bash
+npm start
+# or
+yarn start
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+The application will be available at `http://localhost:5173` by default. Open this URL in your web browser to see the application in action.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Building for Production
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+To create a production build of the application, run:
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+The build output will be located in the `build/` directory, which contains optimized files for deployment.
+
+### Running Tests
+
+To run tests, use:
+
+```bash
+npm test
+# or
+yarn test
+```
+
+This will execute your unit and integration tests.
+
+### Environment Variables
+
+Configure environment variables using the `.env` file in the root of the `frontend` directory. This file should be added to `.gitignore` to prevent sensitive information from being exposed in version control.
+
+### Linting and Formatting
+
+To ensure code quality and consistency, you can run:
+
+```bash
+npm run lint
+# or
+yarn lint
+```
+
+For formatting code, use:
+
+```bash
+npm run format
+# or
+yarn format
+```
+
+### Contributing
+
+Contributions are welcome! Please follow these guidelines:
+
+- Open an issue for any bugs or feature requests.
+- Fork the repository and create a pull request with your changes.
+
+### License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+For more details or if you encounter any issues, please refer to the documentation or contact the maintainers.
+
+```
+
 ```
