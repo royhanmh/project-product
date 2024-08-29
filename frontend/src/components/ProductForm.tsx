@@ -50,39 +50,78 @@ export const ProductForm: React.FC<ProductFormProps> = ({ onAddSuccess }) => {
         <Modal.Header>Add Product</Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <TextInput
-              type="text"
-              name="name"
-              value={product.name}
-              onChange={handleChange}
-              placeholder="Product Name"
-              required
-            />
-            <TextInput
-              type="text"
-              name="category"
-              value={product.category}
-              onChange={handleChange}
-              placeholder="Category"
-              required
-            />
-            <TextInput
-              type="number"
-              name="price"
-              value={product.price}
-              onChange={handleChange}
-              placeholder="Price"
-              required
-            />
-            <TextInput
-              type="number"
-              name="discount"
-              value={product.discount}
-              onChange={handleChange}
-              placeholder="Discount"
-              className="decora"
-              required
-            />
+            <div className="flex flex-col">
+              <label
+                htmlFor="name"
+                className="text-gray-700 dark:text-gray-300"
+              >
+                Product Name
+              </label>
+              <TextInput
+                id="name"
+                type="text"
+                name="name"
+                value={product.name}
+                onChange={handleChange}
+                placeholder="Product Name"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label
+                htmlFor="category"
+                className="text-gray-700 dark:text-gray-300"
+              >
+                Category
+              </label>
+              <TextInput
+                id="category"
+                type="text"
+                name="category"
+                value={product.category}
+                onChange={handleChange}
+                placeholder="Category"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label
+                htmlFor="price"
+                className="text-gray-700 dark:text-gray-300"
+              >
+                Price
+              </label>
+              <TextInput
+                id="price"
+                type="number"
+                name="price"
+                value={product.price}
+                onChange={handleChange}
+                placeholder="Price"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label
+                htmlFor="discount"
+                className="text-gray-700 dark:text-gray-300"
+              >
+                Discount
+              </label>
+              <TextInput
+                id="discount"
+                type="number"
+                name="discount"
+                value={product.discount}
+                onChange={handleChange}
+                placeholder="Discount"
+                required
+              />
+            </div>
+
             <div className="flex justify-end space-x-2">
               <Button type="submit">Add Product</Button>
               <Button color="gray" onClick={() => setIsModalOpen(false)}>
