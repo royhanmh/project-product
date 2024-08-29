@@ -81,6 +81,14 @@ export const ProductList: React.FC = () => {
     currentPage * PRODUCTS_PER_PAGE
   );
 
+  const formatRupiah = (number: number): string => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 2,
+    }).format(number);
+  };
+
   return (
     <div className="my-2 px-4 lg:px-8">
       <ProductForm onAddSuccess={handleAddSuccess} />
@@ -186,14 +194,14 @@ export const ProductList: React.FC = () => {
                         {product.name}
                       </Table.Cell>
                       <Table.Cell>{product.category}</Table.Cell>
-                      <Table.Cell>Rp. {product.price}</Table.Cell>
+                      <Table.Cell>Rp. {formatRupiah(product.price)}</Table.Cell>
                       <Table.Cell>
                         {product.discount
                           ? `${product.discount}%`
                           : "No Discount"}
                       </Table.Cell>
                       <Table.Cell>
-                        Rp. {priceAfterDiscount.toFixed(2)}
+                        Rp. {formatRupiah(priceAfterDiscount)}
                       </Table.Cell>{" "}
                       {/* Display calculated price after discount */}
                       <Table.Cell>
