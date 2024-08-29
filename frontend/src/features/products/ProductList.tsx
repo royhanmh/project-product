@@ -2,7 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../app/store";
 import { getProducts, removeProduct, modifyProduct } from "./productSlice";
-import { Button, Table, Pagination, Alert } from "flowbite-react";
+import {
+  Button,
+  Table,
+  Pagination,
+  Alert,
+  TextInput,
+  Label,
+  Select,
+} from "flowbite-react";
+
 import { ProductForm } from "../../components/ProductForm";
 
 const PRODUCTS_PER_PAGE = 10;
@@ -130,7 +139,7 @@ export const ProductList: React.FC = () => {
                   {modifyProductId === product.id ? (
                     <>
                       <Table.Cell>
-                        <input
+                        <TextInput
                           type="text"
                           value={editedProduct.name}
                           onChange={(e) =>
@@ -139,12 +148,10 @@ export const ProductList: React.FC = () => {
                               name: e.target.value,
                             })
                           }
-                          className="w-32 p-2 border rounded dark:bg-gray-700 dark:text-white"
                         />
                       </Table.Cell>
                       <Table.Cell>
-                        <input
-                          type="text"
+                        <Select
                           value={editedProduct.category}
                           onChange={(e) =>
                             setEditedProduct({
@@ -152,11 +159,18 @@ export const ProductList: React.FC = () => {
                               category: e.target.value,
                             })
                           }
-                          className="w-32 p-2 border rounded dark:bg-gray-700 dark:text-white"
-                        />
+                        >
+                          <option value="">Select Category</option>
+                          <option value="Electronics">Electronics</option>
+                          <option value="Fashion">Fashion</option>
+                          <option value="Books">Books</option>
+                          <option value="Home Appliances">
+                            Home Appliances
+                          </option>
+                        </Select>
                       </Table.Cell>
                       <Table.Cell>
-                        <input
+                        <TextInput
                           type="number"
                           value={editedProduct.price}
                           onChange={(e) =>
@@ -165,11 +179,10 @@ export const ProductList: React.FC = () => {
                               price: parseFloat(e.target.value),
                             })
                           }
-                          className="w-32 p-2 border rounded dark:bg-gray-700 dark:text-white"
                         />
                       </Table.Cell>
                       <Table.Cell>
-                        <input
+                        <TextInput
                           type="number"
                           value={editedProduct.discount}
                           onChange={(e) =>
@@ -178,7 +191,6 @@ export const ProductList: React.FC = () => {
                               discount: parseFloat(e.target.value),
                             })
                           }
-                          className="w-32 p-2 border rounded dark:bg-gray-700 dark:text-white"
                         />
                       </Table.Cell>
                       <Table.Cell>{priceAfterDiscount.toFixed(2)}</Table.Cell>

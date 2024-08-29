@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./../app/store";
 import { addProduct } from "../features/products/productSlice";
-import { Button, Modal, TextInput } from "flowbite-react";
+import { Button, Modal, TextInput, Label, Select } from "flowbite-react";
 
 interface ProductFormProps {
   onAddSuccess: () => void;
@@ -18,10 +18,11 @@ export const ProductForm: React.FC<ProductFormProps> = ({ onAddSuccess }) => {
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(addProduct(product))
@@ -69,21 +70,27 @@ export const ProductForm: React.FC<ProductFormProps> = ({ onAddSuccess }) => {
             </div>
 
             <div className="flex flex-col">
-              <label
-                htmlFor="category"
-                className="text-gray-700 dark:text-gray-300"
-              >
-                Category
-              </label>
-              <TextInput
+              <div className="mb-2 block">
+                <label
+                  htmlFor="category"
+                  className="text-gray-700 dark:text-gray-300"
+                >
+                  Select Category
+                </label>
+              </div>
+              <Select
                 id="category"
-                type="text"
                 name="category"
                 value={product.category}
                 onChange={handleChange}
-                placeholder="Category"
                 required
-              />
+              >
+                <option value="">Select Category</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Books">Books</option>
+                <option value="Home Appliances">Home Appliances</option>
+              </Select>
             </div>
 
             <div className="flex flex-col">
