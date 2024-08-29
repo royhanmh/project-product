@@ -6,7 +6,7 @@ import { Button, Table, Pagination, Alert } from "flowbite-react";
 import { ProductForm } from "../../components/ProductForm";
 
 const PRODUCTS_PER_PAGE = 10;
-const ALERT_AUTO_CLOSE_DURATION = 3000;
+const ALERT_AUTO_CLOSE_DURATION = 5000; // 5 seconds
 
 export const ProductList: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -103,110 +103,121 @@ export const ProductList: React.FC = () => {
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Price</Table.HeadCell>
             <Table.HeadCell>Discount</Table.HeadCell>
+            <Table.HeadCell>Price After Discount</Table.HeadCell>{" "}
+            {/* New Column */}
             <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {displayedProducts.map((product, index) => (
-              <Table.Row
-                key={product.id}
-                className="bg-white dark:border-gray-700 dark:bg-gray-800"
-              >
-                <Table.Cell>
-                  {(currentPage - 1) * PRODUCTS_PER_PAGE + index + 1}
-                </Table.Cell>
-                {modifyProductId === product.id ? (
-                  <>
-                    <Table.Cell>
-                      <input
-                        type="text"
-                        value={editedProduct.name}
-                        onChange={(e) =>
-                          setEditedProduct({
-                            ...editedProduct,
-                            name: e.target.value,
-                          })
-                        }
-                        className="w-32 p-2 border rounded dark:bg-gray-700 dark:text-white"
-                      />
-                    </Table.Cell>
-                    <Table.Cell>
-                      <input
-                        type="text"
-                        value={editedProduct.category}
-                        onChange={(e) =>
-                          setEditedProduct({
-                            ...editedProduct,
-                            category: e.target.value,
-                          })
-                        }
-                        className="w-32 p-2 border rounded dark:bg-gray-700 dark:text-white"
-                      />
-                    </Table.Cell>
-                    <Table.Cell>
-                      <input
-                        type="number"
-                        value={editedProduct.price}
-                        onChange={(e) =>
-                          setEditedProduct({
-                            ...editedProduct,
-                            price: parseFloat(e.target.value),
-                          })
-                        }
-                        className="w-32 p-2 border rounded dark:bg-gray-700 dark:text-white"
-                      />
-                    </Table.Cell>
-                    <Table.Cell>
-                      <input
-                        type="number"
-                        value={editedProduct.discount}
-                        onChange={(e) =>
-                          setEditedProduct({
-                            ...editedProduct,
-                            discount: parseFloat(e.target.value),
-                          })
-                        }
-                        className="w-32 p-2 border rounded dark:bg-gray-700 dark:text-white"
-                      />
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Button size="sm" onClick={handleSaveClick}>
-                        Save
-                      </Button>
-                    </Table.Cell>
-                  </>
-                ) : (
-                  <>
-                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                      {product.name}
-                    </Table.Cell>
-                    <Table.Cell>{product.category}</Table.Cell>
-                    <Table.Cell>Rp. {product.price}</Table.Cell>
-                    <Table.Cell>
-                      {product.discount
-                        ? `${product.discount}%`
-                        : "No Discount"}
-                    </Table.Cell>
-                    <Table.Cell>
-                      <div className="flex space-x-2">
-                        <Button
-                          onClick={() => handleEditClick(product)}
-                          size="sm"
-                        >
-                          Edit
+            {displayedProducts.map((product, index) => {
+              const priceAfterDiscount =
+                product.price - (product.price * product.discount) / 100;
+              return (
+                <Table.Row
+                  key={product.id}
+                  className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                >
+                  <Table.Cell>
+                    {(currentPage - 1) * PRODUCTS_PER_PAGE + index + 1}
+                  </Table.Cell>
+                  {modifyProductId === product.id ? (
+                    <>
+                      <Table.Cell>
+                        <input
+                          type="text"
+                          value={editedProduct.name}
+                          onChange={(e) =>
+                            setEditedProduct({
+                              ...editedProduct,
+                              name: e.target.value,
+                            })
+                          }
+                          className="w-32 p-2 border rounded dark:bg-gray-700 dark:text-white"
+                        />
+                      </Table.Cell>
+                      <Table.Cell>
+                        <input
+                          type="text"
+                          value={editedProduct.category}
+                          onChange={(e) =>
+                            setEditedProduct({
+                              ...editedProduct,
+                              category: e.target.value,
+                            })
+                          }
+                          className="w-32 p-2 border rounded dark:bg-gray-700 dark:text-white"
+                        />
+                      </Table.Cell>
+                      <Table.Cell>
+                        <input
+                          type="number"
+                          value={editedProduct.price}
+                          onChange={(e) =>
+                            setEditedProduct({
+                              ...editedProduct,
+                              price: parseFloat(e.target.value),
+                            })
+                          }
+                          className="w-32 p-2 border rounded dark:bg-gray-700 dark:text-white"
+                        />
+                      </Table.Cell>
+                      <Table.Cell>
+                        <input
+                          type="number"
+                          value={editedProduct.discount}
+                          onChange={(e) =>
+                            setEditedProduct({
+                              ...editedProduct,
+                              discount: parseFloat(e.target.value),
+                            })
+                          }
+                          className="w-32 p-2 border rounded dark:bg-gray-700 dark:text-white"
+                        />
+                      </Table.Cell>
+                      <Table.Cell>{priceAfterDiscount.toFixed(2)}</Table.Cell>
+                      <Table.Cell>
+                        <Button size="sm" onClick={handleSaveClick}>
+                          Save
                         </Button>
-                        <Button
-                          onClick={() => handleDeleteClick(product.id)}
-                          color="failure"
-                          size="sm"
-                        >
-                          Delete
-                        </Button>
-                      </div>
-                    </Table.Cell>
-                  </>
-                )}
-              </Table.Row>
-            ))}
+                      </Table.Cell>
+                    </>
+                  ) : (
+                    <>
+                      <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                        {product.name}
+                      </Table.Cell>
+                      <Table.Cell>{product.category}</Table.Cell>
+                      <Table.Cell>Rp. {product.price}</Table.Cell>
+                      <Table.Cell>
+                        {product.discount
+                          ? `${product.discount}%`
+                          : "No Discount"}
+                      </Table.Cell>
+                      <Table.Cell>
+                        Rp. {priceAfterDiscount.toFixed(2)}
+                      </Table.Cell>{" "}
+                      {/* Display calculated price after discount */}
+                      <Table.Cell>
+                        <div className="flex space-x-2">
+                          <Button
+                            onClick={() => handleEditClick(product)}
+                            size="sm"
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            onClick={() => handleDeleteClick(product.id)}
+                            color="failure"
+                            size="sm"
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      </Table.Cell>
+                    </>
+                  )}
+                </Table.Row>
+              );
+            })}
           </Table.Body>
         </Table>
       </div>
